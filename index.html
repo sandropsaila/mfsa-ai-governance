@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Board Now Owns AI — MFSA's Dear CEO Letter, in Depth</title>
+<style>
+  :root{
+    --ink:#0a1f33;        /* deep supervisory navy */
+    --ink-2:#13324f;
+    --paper:#f6f4ef;      /* warm document paper */
+    --paper-2:#ffffff;
+    --line:#d8d2c6;       /* hairline on paper */
+    --line-2:#1f4063;     /* hairline on navy */
+    --accent:#0f7a6b;     /* MFSA-adjacent teal-green: "governance as enabler" */
+    --accent-soft:#e3efec;
+    --signal:#b4612a;     /* supervisory amber, used sparingly */
+    --muted:#5b6b78;
+    --muted-paper:#6c6356;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .mono{font-family:"SFMono-Regular",ui-monospace,"Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace}
+  .eyebrow{
+    font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:var(--ink);
+    color:#eaf1f5;
+    padding:64px 0 56px;
+    border-bottom:3px solid var(--accent);
+    position:relative;overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .masthead{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line-2);padding-bottom:14px;margin-bottom:46px;
+    font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:#7fa6c0;
+  }
+  .hero h1{
+    font-size:clamp(34px,6vw,68px);
+    line-height:1.04;font-weight:600;letter-spacing:-.015em;
+    max-width:17ch;margin-bottom:26px;
+  }
+  .hero h1 em{font-style:normal;color:#5fd0bd;}
+  .hero .lede{
+    font-size:clamp(17px,2.2vw,21px);max-width:54ch;color:#c4d4df;
+    border-left:2px solid var(--accent);padding-left:20px;
+  }
+  .hero .ref{
+    margin-top:40px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+    color:#7fa6c0;letter-spacing:.04em;
+  }
+  .hero .ref a{color:#5fd0bd;text-decoration:none;border-bottom:1px solid #2c5e54}
+  /* faint grid plate behind hero */
+  .plate{position:absolute;inset:0;z-index:1;opacity:.5;
+    background-image:linear-gradient(var(--ink-2) 1px,transparent 1px);
+    background-size:100% 38px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+            mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+  }
+
+  /* ---------- STAT STRIP ---------- */
+  .strip{background:var(--ink-2);color:#dfeaf1;border-bottom:1px solid var(--line-2)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:26px 22px;border-left:1px solid var(--line-2)}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat .n{font-size:34px;font-weight:600;letter-spacing:-.02em;color:#fff}
+  .stat .n em{font-style:normal;color:#5fd0bd}
+  .stat .l{font-size:12.5px;color:#9db8c9;margin-top:4px;line-height:1.35}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:66px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;gap:18px;align-items:baseline;margin-bottom:8px}
+  .sec-no{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--signal);
+    font-weight:600;letter-spacing:.05em}
+  h2{font-size:clamp(26px,3.4vw,38px);font-weight:600;letter-spacing:-.01em;line-height:1.12;max-width:24ch}
+  .sec-intro{font-size:18px;color:var(--muted-paper);max-width:62ch;margin:18px 0 38px}
+
+  /* three outcomes */
+  .outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .start-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .help{margin-top:32px;background:var(--ink);color:#dfeaf1;border-left:3px solid var(--accent);padding:30px 32px}
+  .help .k{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5fd0bd;margin-bottom:12px}
+  .help h3{font-size:21px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.25;max-width:34ch}
+  .help p{font-size:16px;color:#c4d4df;max-width:70ch}
+  .help p + p{margin-top:14px}
+  .help .svc{color:#fff;font-weight:600}
+  .outcome{background:var(--paper-2);border:1px solid var(--line);border-top:3px solid var(--accent);padding:26px 24px}
+  .outcome .k{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .outcome h3{font-size:19px;font-weight:600;margin-bottom:10px;line-height:1.25}
+  .outcome p{font-size:15px;color:var(--muted-paper)}
+
+  /* observation areas — the depth the email omits */
+  .obs{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+  .ob{display:grid;grid-template-columns:64px 1fr;border-bottom:1px solid var(--line);
+    background:var(--paper-2);transition:background .2s}
+  .ob:hover{background:#fbfaf6}
+  .ob .num{font-family:ui-monospace,Menlo,monospace;font-size:15px;color:var(--signal);
+    padding:28px 0 0 0;text-align:center;font-weight:600;border-right:1px solid var(--line)}
+  .ob .body{padding:26px 28px 28px}
+  .ob h3{font-size:21px;font-weight:600;margin-bottom:14px}
+  .ob .obs-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+  .ob .found, .ob .expect{font-size:15px;color:var(--muted-paper)}
+  .ob .tag{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;font-weight:600;display:block;margin-bottom:7px}
+  .ob .found .tag{color:var(--muted)}
+  .ob .expect .tag{color:var(--accent)}
+  .ob .expect{border-left:2px solid var(--accent-soft);padding-left:18px}
+
+  /* service mapping (from email) -> deepened */
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .cell{background:var(--paper-2);padding:24px 24px}
+  .cell h3{font-size:17px;font-weight:600;margin-bottom:8px}
+  .cell p{font-size:14.5px;color:var(--muted-paper)}
+  .cell .links{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--accent);
+    letter-spacing:.06em;margin-top:12px;text-transform:uppercase}
+
+  /* ---------- ANNEX EXPLORER (signature element) ---------- */
+  .annex-intro{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;margin-bottom:34px}
+  .annex-meta{background:var(--ink);color:#dfeaf1;padding:26px;border-top:3px solid var(--signal)}
+  .annex-meta .big{font-size:46px;font-weight:600;color:#fff;letter-spacing:-.02em}
+  .annex-meta .big em{font-style:normal;color:#f0a868}
+  .annex-meta p{font-size:14px;color:#9db8c9;margin-top:8px}
+
+  .domains{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+  .chip{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em;
+    padding:9px 15px;border:1px solid var(--line);background:var(--paper-2);
+    cursor:pointer;color:var(--muted-paper);transition:all .15s;border-radius:2px}
+  .chip:hover{border-color:var(--accent);color:var(--ink)}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip .c{color:var(--signal);font-weight:600;margin-right:7px}
+  .chip.active .c{color:#f0a868}
+
+  .register{border:1px solid var(--line);background:var(--paper-2)}
+  .qrow{border-bottom:1px solid var(--line)}
+  .qrow:last-child{border-bottom:0}
+  .qhead{display:flex;gap:16px;align-items:flex-start;padding:18px 22px;cursor:pointer;
+    list-style:none;transition:background .15s}
+  .qhead::-webkit-details-marker{display:none}
+  .qrow[open] .qhead{background:#f1ede4}
+  .qhead:hover{background:#f1ede4}
+  .qhead .qid{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:600;
+    color:var(--accent);min-width:34px;padding-top:2px}
+  .qhead .qt{font-size:16.5px;font-weight:600;flex:1;line-height:1.4}
+  .qhead .qx{font-family:ui-monospace,Menlo,monospace;color:var(--muted);font-size:18px;
+    transition:transform .2s;padding-top:1px}
+  .qrow[open] .qhead .qx{transform:rotate(45deg)}
+  .qbody{padding:4px 22px 24px 72px}
+  .qbody .q{font-size:15.5px;color:var(--ink-2);font-style:italic;margin-bottom:18px;
+    border-left:2px solid var(--accent);padding-left:16px}
+  .qcols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .qcols h4{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .qcols p{font-size:14px;color:var(--muted-paper);line-height:1.55}
+  .qcols .produce h4{color:var(--accent)}
+  .hidden{display:none}
+  .tm-note{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--signal);
+    margin-top:18px;letter-spacing:.03em}
+
+  /* ---------- CLOSING ---------- */
+  .close{background:var(--ink);color:#eaf1f5;border-bottom:0}
+  .close h2{color:#fff;max-width:20ch}
+  .close .sec-intro{color:#c4d4df}
+  .close .focus{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-2);
+    border:1px solid var(--line-2);margin:30px 0 40px}
+  .close .focus div{background:var(--ink-2);padding:20px 18px;font-size:14.5px;color:#dfeaf1}
+  .close .focus div .n{font-family:ui-monospace,Menlo,monospace;color:#5fd0bd;font-size:12px;display:block;margin-bottom:8px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+    font-family:ui-monospace,Menlo,monospace;font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;padding:16px 30px;border:0;font-weight:600}
+  .cta:hover{background:#0c8a78}
+  .contacts{margin-top:46px;border-top:1px solid var(--line-2);padding-top:28px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:14px}
+  .contacts .nm{font-weight:600;color:#fff}
+  .contacts .ro{color:#9db8c9;font-size:13px;margin:3px 0 6px}
+  .contacts a{color:#5fd0bd;text-decoration:none;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+
+  footer{background:var(--ink);color:#6f8aa0;padding:40px 0 56px}
+  footer .wrap{font-size:11.5px;line-height:1.7;border-top:1px solid var(--line-2);padding-top:24px}
+  footer a{color:#7fa6c0}
+
+  @media(max-width:820px){
+    .strip .wrap{grid-template-columns:1fr 1fr}
+    .stat:nth-child(3){border-left:0;padding-left:0}
+    .outcomes{grid-template-columns:1fr}
+    .start-grid{grid-template-columns:1fr}
+    .map{grid-template-columns:1fr}
+    .ob .obs-grid{grid-template-columns:1fr;gap:20px}
+    .ob .expect{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
+    .annex-intro{grid-template-columns:1fr;gap:24px}
+    .qcols{grid-template-columns:1fr;gap:18px}
+    .close .focus{grid-template-columns:1fr 1fr}
+    .contacts{grid-template-columns:1fr}
+    .ob .num{padding-top:24px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  a:focus-visible,.chip:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="plate"></div>
+  <div class="wrap">
+    <div class="masthead">
+      <span>Malta · Financial Services</span>
+      <span>MFSA Dear CEO Letter · 04 June 2026</span>
+    </div>
+    <p class="eyebrow">MFSA's Dear CEO Letter on AI</p>
+    <h1>What your board must now <em>be able to show</em>.</h1>
+    <p class="lede">AI governance just became a supervisory expectation in Malta — not a nice-to-have. Nothing must be filed proactively, but on request every firm must show its AI is mapped, its risks assessed, its board engaged, and its gaps closed.</p>
+    <p class="ref">Source letter ·
+      <a href="https://www.mfsa.mt/wp-content/uploads/2026/06/Dear-CEO-letter-Artificial-Intelligence-AI-Governance-Risk-and-Prudential-Expectations.pdf" target="_blank" rel="noopener">Read the MFSA letter (PDF) →</a>
+    </p>
+  </div>
+</header>
+
+<!-- STAT STRIP -->
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><div class="n"><em>21%</em></div><div class="l">of companies have a mature model for governing autonomous AI<br><span style="opacity:.6">Deloitte, 2026 State of AI in the Enterprise</span></div></div>
+    <div class="stat"><div class="n"><em>74%</em></div><div class="l">of enterprises expect to use agentic AI within two years — up from 23% today<br><span style="opacity:.6">Deloitte, 2026 State of AI in the Enterprise</span></div></div>
+    <div class="stat"><div class="n">16</div><div class="l">question areas in the Annex 1 self-assessment register</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">priority areas where supervisory attention lands first</div></div>
+  </div>
+</div>
+
+<!-- WHAT THE LETTER DOES -->
+<section id="outcomes">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">01</span><h2>Three outcomes the letter is built to achieve</h2></div>
+    <p class="sec-intro">The email told you AI governance became a supervisory expectation. Here is the structure beneath that headline — the three explicit outcomes the MFSA designed the letter to drive.</p>
+    <div class="outcomes">
+      <div class="outcome">
+        <div class="k">Outcome 01</div>
+        <h3>AI as a prudential risk area</h3>
+        <p>Firms must treat AI as prudentially relevant — not merely an operational or technological enhancement — and assess how it affects their risk profile, decision-making and resilience within existing governance structures.</p>
+      </div>
+      <div class="outcome">
+        <div class="k">Outcome 02</div>
+        <h3>A structured internal assessment</h3>
+        <p>The letter is meant to prompt a critical review at board and senior-management level: evaluate current and anticipated AI use, find gaps in governance, oversight and controls, and remediate — with accountability clearly defined.</p>
+      </div>
+      <div class="outcome">
+        <div class="k">Outcome 03</div>
+        <h3>Consistency across the market</h3>
+        <p>By setting expectations early, the MFSA gives firms the chance to align frameworks proactively — reducing fragmented, inconsistent approaches to AI adoption across the sector.</p>
+      </div>
+    </div>
+
+    <div class="help">
+      <div class="k">How Deloitte can help</div>
+      <h3>Turning three outcomes into evidence the board can stand behind</h3>
+      <p>Each outcome maps to a concrete piece of work. On <span class="svc">recognising AI as a prudential risk</span>, our AI Control over Risk review helps classify high-risk systems and embed AI into your existing risk and decision-making frameworks rather than treating it as a side process. On the <span class="svc">structured internal assessment</span>, our MFSA Self-Assessment Support takes you through the Annex 1 register end to end — building the AI inventory, mapping vendor and data dependencies, and assembling the governance evidence and board reporting the framework expects. And on <span class="svc">market consistency</span>, our AI Readiness and gap analysis benchmarks your frameworks against the EU AI Act and ISO/IEC 42001, so you align proactively rather than retrofit controls under supervisory pressure.</p>
+      <p>The aim is practical: when the MFSA asks, you can show the assessment was performed, its outcomes were considered at board level, and identified gaps are being closed — with governance positioned as the enabler of confident adoption, not the brake on it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KEY OBSERVATIONS — the detail omitted from the email -->
+<section id="observations">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">02</span><h2>Five areas the MFSA examined — and what it now expects</h2></div>
+    <p class="sec-intro">The 2025 assessment found AI awareness rising but implementation early: many firms had no board-approved AI strategy, leaned heavily on external generative-AI tools, and held limited internal expertise. Against that backdrop, the letter sets out five observation areas, each paired with a specific expectation.</p>
+
+    <div class="obs">
+      <div class="ob">
+        <div class="num">4.1</div>
+        <div class="body">
+          <h3>Governance &amp; oversight</h3>
+          <div class="obs-grid">
+            <div class="found"><span class="tag">What the MFSA found</span>Governance frameworks are uneven. Responsibility for AI is often undefined, and board / senior-management oversight is limited — raising the risk that systems are deployed without challenge, validation, or alignment to risk appetite, including where they touch critical functions under DORA.</div>
+            <div class="expect"><span class="tag">What it now expects</span>Clear governance arrangements, with the board accountable even for third-party-provided AI. Responsibilities assigned, sufficient in-house expertise to challenge effectively, and roles across the three lines of defence defined so no single function holds unchecked control over design, deployment and validation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ob">
+        <div class="num">4.2</div>
+        <div class="body">
+          <h3>Third-party dependencies &amp; concentration</h3>
+          <div class="obs-grid">
+            <div class="found"><span class="tag">What the MFSA found</span>Strong reliance on third-party providers — cloud, model developers, data vendors — with limited visibility into how those systems function, introducing concentration and operational-dependency risk that grows as adoption scales.</div>
+            <div class="expect"><span class="tag">What it now expects</span>Treat AI outsourcing under existing outsourcing and third-party risk frameworks. Retain control, oversight and understanding of external systems; assess concentration risk; and avoid over-reliance on a limited set of providers where critical operations are at stake.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ob">
+        <div class="num">4.3</div>
+        <div class="body">
+          <h3>Model risk &amp; reliability</h3>
+          <div class="obs-grid">
+            <div class="found"><span class="tag">What the MFSA found</span>Advanced and generative models can produce inconsistent, inaccurate or hard-to-interpret outputs, and may drift over time in ways not immediately visible — undermining decision reliability in critical processes.</div>
+            <div class="expect"><span class="tag">What it now expects</span>Validation, testing and ongoing monitoring, with drift detection and escalation paths. Firms must explain and evidence how systems behave; where they cannot, they should restrict or redesign use — particularly in higher-risk contexts — supported by documentation and audit trails.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ob">
+        <div class="num">4.4</div>
+        <div class="body">
+          <h3>Data governance</h3>
+          <div class="obs-grid">
+            <div class="found"><span class="tag">What the MFSA found</span>Data governance frameworks are not always developed enough to support AI. Weak data governance can produce biased outputs, incorrect conclusions or regulatory breaches — especially where personal or special-category data is involved.</div>
+            <div class="expect"><span class="tag">What it now expects</span>Robust data governance: data that is accurate, relevant and validated; data flows and usage understood and documented; and consistency with applicable regulatory requirements and internal policy.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ob">
+        <div class="num">4.5</div>
+        <div class="body">
+          <h3>Operational &amp; systemic considerations</h3>
+          <div class="obs-grid">
+            <div class="found"><span class="tag">What the MFSA found</span>Shared models, common data sources and the same third-party providers create interconnectedness across firms. Under stress, this can drive correlated behaviour or amplify existing market vulnerabilities.</div>
+            <div class="expect"><span class="tag">What it now expects</span>A forward-looking view of AI risk that weighs system-wide as well as firm-level impact — assessing dependencies, identifying single points of failure, and putting contingency measures in place.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE MAPPING -->
+<section id="mapping">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">03</span><h2>Where Deloitte's AI Controls &amp; Assurance services map</h2></div>
+    <p class="sec-intro">Governance is the enabler of confident adoption — not the brake on it. These services align to the expectations above and to the Annex 1 exercise below.</p>
+    <div class="map">
+      <div class="cell"><h3>AI Governance &amp; Control</h3><p>Advisory review of AI governance structures and control frameworks, including AI inventory completeness and technical documentation — addressing the call for a board-approved AI strategy and stronger oversight.</p><div class="links">→ 4.1 Governance &amp; oversight</div></div>
+      <div class="cell"><h3>AI Control over Risk</h3><p>Advisory review of how AI-related risks are identified, assessed and managed across governance and operations, including classification of high-risk AI systems.</p><div class="links">→ 4.3 Model risk · 4.5 Systemic</div></div>
+      <div class="cell"><h3>AI Readiness</h3><p>Assurance-readiness and gap analysis against current and proposed AI regulation and standards, including EU AI Act and ISO/IEC 42001 gap assessments.</p><div class="links">→ Supervisory readiness on request</div></div>
+      <div class="cell"><h3>Internal Audit Support</h3><p>Technical AI, control and governance specialist support to internal audit — strengthening the third line and the board's overall lines of oversight.</p><div class="links">→ Three lines of defence</div></div>
+      <div class="cell"><h3>MFSA Self-Assessment Support</h3><p>Structured support to complete the Annex 1 register — building the inventory of AI-enabled processes, tools and vendor dependencies, mapping data flows, and assembling governance evidence and board reporting.</p><div class="links">→ Annex 1 (below)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GETTING STARTED -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">04</span><h2>Haven't started, just starting, or unsure where to begin?</h2></div>
+    <p class="sec-intro">The MFSA's expectations aren't limited to firms already using AI — governance frameworks must reflect both current and anticipated adoption. For firms at the start of the journey, this is the moment to get the foundations right: connecting strategy, data, implementation, governance and assurance into a single operating model. Deloitte offers hands-on support across four areas.</p>
+    <div class="start-grid">
+      <div class="outcome">
+        <div class="k">01 · Strategy</div>
+        <h3>AI strategy &amp; use-case identification</h3>
+        <p>Spotting, prioritising and assessing AI opportunities across the enterprise — aligned to business objectives, value creation and risk appetite from the outset.</p>
+      </div>
+      <div class="outcome">
+        <div class="k">02 · Build</div>
+        <h3>AI implementation &amp; transformation</h3>
+        <p>Designing, deploying and scaling solutions — from copilots and GenAI applications to advanced analytics, automation and enterprise AI platforms.</p>
+      </div>
+      <div class="outcome">
+        <div class="k">03 · Data</div>
+        <h3>AI &amp; data readiness</h3>
+        <p>Assessing the quality, governance, architecture and accessibility of data, recognising that trusted AI depends on strong data foundations.</p>
+      </div>
+      <div class="outcome">
+        <div class="k">04 · Govern</div>
+        <h3>AI governance &amp; control</h3>
+        <p>Designing governance structures and organisational control frameworks. Starting with governance in place isn't slower — it's how firms avoid retrofitting controls later under supervisory pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANNEX 1 EXPLORER — signature -->
+<section id="annex">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">05</span><h2>Annex 1, opened up: the self-assessment register</h2></div>
+    <div class="annex-intro">
+      <div>
+        <p class="sec-intro" style="margin-bottom:0">The email teased the self-assessment. This is it. The MFSA's Annex 1 is a structured register across five domains — for each question it names the <strong>evidence you will need</strong> and the <strong>output you must produce</strong>. Results are not submitted today, but the MFSA may request evidence that the exercise was performed, considered at board level, and that gaps are being remediated. Filter by domain, then open any question.</p>
+      </div>
+      <div class="annex-meta">
+        <div class="big">5<em>+16</em></div>
+        <p>five domains · sixteen question areas · plus ten transaction-monitoring &amp; financial-crime sub-questions that apply only where TM AI is in use.</p>
+      </div>
+    </div>
+
+    <div class="domains" id="domains">
+      <button class="chip active" data-d="all"><span class="c">▣</span>All domains</button>
+      <button class="chip" data-d="A"><span class="c">A</span>Process &amp; Tool Inventory</button>
+      <button class="chip" data-d="B"><span class="c">B</span>Data Governance &amp; Flow</button>
+      <button class="chip" data-d="C"><span class="c">C</span>Governance, Accountability &amp; Board MI</button>
+      <button class="chip" data-d="D"><span class="c">D</span>Third-Party Risk &amp; Change</button>
+      <button class="chip" data-d="E"><span class="c">E</span>Conduct, Prudential &amp; Financial Crime</button>
+    </div>
+
+    <div class="register" id="register"><!-- rows injected --></div>
+    <p class="tm-note">Questions 15g–15j apply only where transaction-monitoring AI is used.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="close" id="next">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">06</span><h2>Where supervisory attention lands first</h2></div>
+    <p class="sec-intro">The MFSA will fold AI into its ongoing supervision — onsite inspections and thematic reviews — and has flagged four priority areas. The Financial Supervisors Academy will also offer training to build oversight capability across firms.</p>
+    <div class="focus">
+      <div><span class="n">Priority 01</span>Governance &amp; oversight frameworks</div>
+      <div><span class="n">Priority 02</span>Third-party dependencies</div>
+      <div><span class="n">Priority 03</span>AI in critical or customer-impacting processes</div>
+      <div><span class="n">Priority 04</span>Alignment of AI adoption with risk appetite</div>
+    </div>
+    <p style="font-size:18px;color:#c4d4df;max-width:60ch;margin-bottom:30px">The firms that treat governance as the enabler of confident adoption — not the brake on it — will be the ones scaling AI with their regulator's trust intact.</p>
+    <a class="cta" href="mailto:spsaila@deloitte.com.mt?subject=MFSA%20AI%20governance%20%E2%80%94%20self-assessment%20conversation">Start a conversation →</a>
+
+    <div class="contacts">
+      <div><div class="nm">Ian Coppini</div><div class="ro">Partner, Financial Services Industry Leader · Deloitte Malta</div><a href="mailto:icoppini@deloitte.com.mt">icoppini@deloitte.com.mt</a></div>
+      <div><div class="nm">Sandro Psaila</div><div class="ro">Partner, IT Audit &amp; Assurance · Deloitte Malta</div><a href="mailto:spsaila@deloitte.com.mt">spsaila@deloitte.com.mt</a></div>
+      <div><div class="nm">Kurt Rapinett</div><div class="ro">Senior Manager · Deloitte Malta</div><a href="mailto:krapinett@deloitte.com.mt">krapinett@deloitte.com.mt</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    This microsite summarises the MFSA's Dear CEO letter of 4 June 2026 (Artificial Intelligence – Governance, Risk and Prudential Expectations) and Deloitte Malta's accompanying communication of 12 June 2026. It contains general information only and does not constitute professional advice. Before acting on any matter, consult a qualified professional adviser. The MFSA letter is the authoritative source: <a href="https://www.mfsa.mt/wp-content/uploads/2026/06/Dear-CEO-letter-Artificial-Intelligence-AI-Governance-Risk-and-Prudential-Expectations.pdf" target="_blank" rel="noopener">view the original PDF</a>. © 2026 — For information, contact Deloitte Malta.
+  </div>
+</footer>
+
+<script>
+const Q = [
+ {id:"1",d:"A",t:"End-to-end process inventory completeness",
+  q:"Have you listed ALL business-critical processes, broken each into sub-steps, and named every tool used at each sub-step (including office automation and small scripts)?",
+  ev:"Annex A register; process maps or swim-lanes; screenshots or SOPs showing the tools used at each step.",
+  pr:"Total processes; total sub-steps; total tools; tools-per-process (min / average / max)."},
+ {id:"2",d:"A",t:"Vendor &amp; sub-vendor (4th-party) identification",
+  q:"For each tool, have you identified the primary vendor and all material sub-vendors — cloud/hosting, AI model provider, key data providers, and open-source components in an SBOM?",
+  ev:"Contracts, procurement due-diligence, vendor responses, and Software Bill of Materials or architecture diagrams.",
+  pr:"Vendors per process; % of tools involving 4th parties; top-5 vendor concentration; CSP concentration by provider and region."},
+ {id:"3",d:"A",t:"AI capability detection &amp; classification",
+  q:"For each tool, have you confirmed whether it includes AI? If yes — recorded AI type (ML, GenAI, NLP, CV, agentic), who provides it, where it runs, and its exact function in the step?",
+  ev:"Vendor documentation, technical product sheets, discovery testing results, procurement questionnaires answering AI capability explicitly.",
+  pr:"Total AI-enabled tools (overall and per process); breakdown by AI type and by provider (internal vs external)."},
+ {id:"4",d:"A",t:"Autonomy, materiality &amp; impact tagging",
+  q:"Is each AI use tagged with autonomy level (None/Assist/HITL/Partial/Full), materiality (Low/Medium/High), and whether it can affect customers or markets?",
+  ev:"Model inventory, criticality criteria, approvals showing who authorised the autonomy level and safeguards.",
+  pr:"Number of high-materiality AI uses; % that are Partial/Full automation; split between customer-facing and internal uses."},
+
+ {id:"5",d:"B",t:"Data lineage &amp; flows per AI-enabled tool",
+  q:"For each AI use, have you mapped inputs and outputs; whether personal or special-category data is involved; training vs inference datasets; storage and processing locations; and cross-border transfers?",
+  ev:"Data flow diagrams, Records of Processing Activities (RoPA), lineage maps from data governance tools.",
+  pr:"Documented data flows; number using special categories; number with cross-border transfers; % of AI uses with a complete lineage map."},
+ {id:"6",d:"B",t:"Lawful basis, consent &amp; reuse controls",
+  q:"Is the lawful basis documented for each dataset used by AI? Are customer notices or consents up to date? Are there rules and approvals for reusing data across tools and processes?",
+  ev:"DPIAs, Legitimate Interests Assessments (LIA), privacy notices, reuse approvals.",
+  pr:"% of datasets with recorded lawful basis and notice; number of data reuse cases; number lacking consent/notice updates."},
+ {id:"7",d:"B",t:"Bias, performance &amp; drift monitoring coverage",
+  q:"Do all AI uses have documented pre-deployment tests (accuracy and fairness) and ongoing post-deployment monitoring (performance, drift, fairness thresholds) with clear remediation triggers?",
+  ev:"Test protocols, fairness/accuracy reports, monitoring dashboards, issue logs.",
+  pr:"% of AI uses with full pre-deployment tests; number without drift monitoring; remediations in the last 12 months."},
+
+ {id:"8a",d:"C",t:"Ownership &amp; RACI per process / tool / vendor",
+  q:"For each line in the register, is there a named business owner, model owner, data owner and vendor owner — with no conflicts (e.g. the same person not both building and approving)?",
+  ev:"RACI matrix, policy extracts, committee Terms of Reference.",
+  pr:"% coverage with named owners; number of ownership gaps; conflicts of interest identified and resolved."},
+ {id:"8b",d:"C",t:"Cross-functional oversight (FCC, Compliance, IT)",
+  q:"Are FCC, Compliance and IT consistently involved in oversight of AI uses touching their remit — FCC for KYC/TM/AML, Compliance for legal and customer protections, IT for change control, security and resilience?",
+  ev:"Committee minutes, attendance records, sign-offs, change tickets showing FCC/Compliance/IT input.",
+  pr:"% of AI uses with FCC/Compliance/IT participation in design/validation/review; standing forums and cadence."},
+ {id:"8c",d:"C",t:"Calibration &amp; maintenance operating model",
+  q:"Does calibration and maintenance happen internally, jointly with the vendor, or externally? Are decision rights, change approval, testing responsibilities, rollback/kill-switch and vendor access clearly defined and evidenced?",
+  ev:"Operating procedures, vendor contracts/addenda, change logs/CAB minutes, model cards, access reviews.",
+  pr:"Count and % Internal vs Joint vs External-only; for external-only: compensating controls; who can change models/prompts/thresholds and where documented."},
+ {id:"9",d:"C",t:"Board MI completeness on AI &amp; vendor risk",
+  q:"Does the board receive regular reports showing AI uses per process; vendor and 4th-party concentrations; incidents and customer detriment; and an overall AI risk heatmap with actions and deadlines?",
+  ev:"Board agendas and packs, action logs with owners and due dates.",
+  pr:"Reporting frequency; copies of the last two packs; list of open actions and their age."},
+
+ {id:"10",d:"D",t:"Outsourcing &amp; ICT risk controls per vendor",
+  q:"For all vendors supporting AI, do contracts cover SLAs, security, audit rights, incident notification, data location, exit/portability and approval for sub-vendors?",
+  ev:"Contracts and addenda, due-diligence results, vendor responses.",
+  pr:"% of vendors meeting all key clauses; number of gaps by clause; high-risk vendors with gaps."},
+ {id:"11",d:"D",t:"Fourth-party visibility &amp; concentration risk",
+  q:"Can you quantify reliance on the top providers (cloud/AI model/data)? Can you spot single points of failure or regional dependencies — e.g. all in one data-centre region?",
+  ev:"Aggregated Annex A register; a short concentration analysis note or slide.",
+  pr:"Share of AI uses dependent on top-3 providers; optional concentration index; critical processes depending on a single provider."},
+ {id:"12",d:"D",t:"Change management, rollback &amp; kill-switch",
+  q:"Do AI-enabled tools follow change control (versioning, peer review/approval, canary/A-B testing where suitable) and have a tested rollback plan and an accessible kill-switch?",
+  ev:"Change logs, Change Advisory Board (CAB) minutes, incident post-mortems / root-cause analyses.",
+  pr:"% of AI uses with documented rollback and kill-switch; emergency rollbacks or drills in the last 12 months."},
+
+ {id:"13",d:"E",t:"Customer-facing AI: disclosure &amp; human escalation",
+  q:"Are customers clearly told when they interact with AI? Is it easy to reach a trained human, and do you track handover speed — especially for vulnerable customers?",
+  ev:"Scripts, chatbot configurations, QA reports, service dashboards.",
+  pr:"Channels using AI; % with AI disclosure; % with tracked human escalation; average time-to-human."},
+ {id:"14",d:"E",t:"Financial exclusion &amp; fairness",
+  q:"Have you assessed whether AI-supported decisions risk bias or financial exclusion? Are outcomes explainable, subject to effective challenge, and governed as sensitive/high-risk with clear management accountability?",
+  ev:"Model and materiality documentation, fairness/bias testing, customer communications and case logs, records of management oversight.",
+  pr:"AI use cases in segmentation, credit, pricing and advice; number with completed fairness/exclusion assessments; outcome differences across customer groups; manual overrides, challenges and complaints."},
+ {id:"15a",d:"E",t:"Systemic interaction &amp; feedback risks (all AI)",
+  q:"Have you assessed shared data/model dependencies, feedback loops, single points of failure and alert/decision volatility — with scenarios and manual overrides/kill-switches defined?",
+  ev:"Scenario packs, playbooks, change/incident logs.",
+  pr:"Scenarios run; overlaps in providers/data; dates/results of drills (kill-switch, rollback, manual handover)."},
+ {id:"15b",d:"E",t:"FC strategy for AI",
+  q:"Does the firm have a documented strategy for AI in Financial Crime (AML, fraud, screening, KYC) — covering objectives, scope, roles, controls and periodic review?",
+  ev:"FC AI strategy, policy addenda, board/committee approval.",
+  pr:"Strategy document name/date; next review due; scope of AI uses covered."},
+ {id:"15c",d:"E",t:"Alignment with FC risk assessment &amp; appetite",
+  q:"How does AI use in FC align with your enterprise FC risk assessment and risk appetite — thresholds for false positives/negatives, customer impact and resourcing?",
+  ev:"Business risk assessment, risk appetite statements, MI.",
+  pr:"Reference to latest FC risk assessment; mapping notes to appetite metrics and thresholds."},
+ {id:"15d",d:"E",t:"Missed-case learning",
+  q:"Has the firm identified cases AI initially missed (e.g. SARs/STRs later found by humans or post-event review) and fed them back for model improvement?",
+  ev:"Case reviews, QA/QC logs, model change tickets.",
+  pr:"Missed cases detected; % reviewed; model updates stemming from missed-case analysis."},
+ {id:"15e",d:"E",t:"Review / recalibration thresholds",
+  q:"What quantitative thresholds trigger model review or recalibration — precision/recall drift, false positives/negatives, case ageing, throughput, alert volatility?",
+  ev:"Monitoring dashboards, threshold register, CAB minutes.",
+  pr:"List of thresholds and current values; threshold breaches in the last 12 months; outcomes."},
+ {id:"15f",d:"E",t:"Use-case risk classification",
+  q:"Has the firm assessed whether each FC AI use-case is high-risk (financial-crime or customer impact) with proportionate controls — HITL, sampling, second-line review?",
+  ev:"Risk classification criteria, approvals, control design.",
+  pr:"Count/% of high-risk FC AI uses; control overlays applied."},
+ {id:"15g",d:"E",tm:true,t:"TM — Typology coverage",
+  q:"Which typologies is the TM model designed to detect (layering, smurfing, mule activity, sanctions evasion, fraud), and how is coverage validated?",
+  ev:"Typology library, validation reports, red-team tests, MLRO approval.",
+  pr:"Typology list; validation frequency; gaps and remediation plan."},
+ {id:"15h",d:"E",tm:true,t:"TM — Feature/rule classification &amp; risk-rating",
+  q:"How are data points/features and rules classified and risk-rated? Are proxies for protected characteristics controlled?",
+  ev:"Feature governance pack, fairness testing artifacts, MLRO approval.",
+  pr:"Feature/rule catalog with risk weights; fairness checks."},
+ {id:"15i",d:"E",tm:true,t:"TM — Operating mode vs rules-based",
+  q:"Does the AI replace, complement, or work in tandem with rules-based scenarios (e.g. as a prioritiser)? Is there a challenger or back-stop?",
+  ev:"Design docs, Policies &amp; Procedures, AML Manual.",
+  pr:"Mode per scenario; presence of challenger/back-stop."},
+ {id:"15j",d:"E",tm:true,t:"TM — Alert-volume stability monitoring",
+  q:"Is there monitoring for sudden drops or surges in alert volumes or case conversions, with investigation and escalation?",
+  ev:"MI dashboards, incident logs.",
+  pr:"KPIs on alert volumes and conversion; anomalies and investigations."},
+ {id:"16",d:"E",t:"Market &amp; portfolio AI correlation assessment",
+  q:"Have you analysed shared data/model dependencies, correlation/herding risks and feedback loops, and run stress scenarios with clear kill-switches or manual overrides?",
+  ev:"Stress-test packs, scenario results, playbooks showing who does what and when.",
+  pr:"Scenarios run; overlaps in providers/data; results from a 'liquidity withdrawal' drill (how you would reduce or stop activity safely)."}
+];
+
+const reg = document.getElementById('register');
+function render(filter){
+  reg.innerHTML = Q.filter(x => filter==='all' || x.d===filter).map(x => `
+    <details class="qrow" data-d="${x.d}">
+      <summary class="qhead">
+        <span class="qid">${x.id}</span>
+        <span class="qt">${x.t}${x.tm?' <span class="mono" style="color:var(--signal);font-size:11px;letter-spacing:.08em">· TM only</span>':''}</span>
+        <span class="qx">+</span>
+      </summary>
+      <div class="qbody">
+        <p class="q">${x.q}</p>
+        <div class="qcols">
+          <div class="evidence"><h4>Evidence you will need</h4><p>${x.ev}</p></div>
+          <div class="produce"><h4>What you must produce</h4><p>${x.pr}</p></div>
+        </div>
+      </div>
+    </details>`).join('');
+}
+render('all');
+
+document.querySelectorAll('#domains .chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('#domains .chip').forEach(b=>b.classList.remove('active'));
+    c.classList.add('active');
+    render(c.dataset.d);
+  });
+});
+</script>
+</body>
+</html>
