@@ -209,9 +209,102 @@
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   a:focus-visible,.chip:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---------- PASSKEY GATE ---------- */
+  #gate{position:fixed;inset:0;z-index:9999;background:var(--ink);
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .plate{position:absolute;inset:0;z-index:1;opacity:.45;
+    background-image:linear-gradient(var(--ink-2) 1px,transparent 1px);background-size:100% 38px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+            mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+  #gate .box{position:relative;z-index:2;max-width:380px;width:100%;text-align:center}
+  #gate .eyebrow{color:var(--accent);margin-bottom:16px;display:block}
+  #gate h2{color:#fff;font-size:26px;font-weight:600;margin-bottom:10px;line-height:1.2}
+  #gate p{color:#9db8c9;font-size:15px;margin-bottom:26px}
+  #gate .pin{display:flex;gap:10px;justify-content:center;margin-bottom:18px}
+  #gate .pin input{width:54px;height:64px;text-align:center;font-size:28px;font-weight:600;
+    color:#fff;background:var(--ink-2);border:1px solid var(--line-2);border-radius:4px;
+    font-family:ui-monospace,Menlo,monospace;outline:none;transition:border-color .15s}
+  #gate .pin input:focus{border-color:var(--accent)}
+  #gate.err .pin input{border-color:#b4612a;animation:shake .35s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  #gate .msg{color:#cf8a5a;font-size:13px;height:18px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.03em}
+  body.locked{overflow:hidden}
+  @media(prefers-reduced-motion:reduce){#gate.err .pin input{animation:none}}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<!-- PASSKEY GATE -->
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="plate"></div>
+  <div class="box">
+    <span class="eyebrow">Deloitte Malta · Private preview</span>
+    <h2 id="gate-title">Enter access code</h2>
+    <p>This microsite is shared selectively. Enter the 4-digit code to continue.</p>
+    <div class="pin" id="pin">
+      <input type="password" inputmode="numeric" maxlength="1" aria-label="Digit 1" autocomplete="off">
+      <input type="password" inputmode="numeric" maxlength="1" aria-label="Digit 2" autocomplete="off">
+      <input type="password" inputmode="numeric" maxlength="1" aria-label="Digit 3" autocomplete="off">
+      <input type="password" inputmode="numeric" maxlength="1" aria-label="Digit 4" autocomplete="off">
+    </div>
+    <div class="msg" id="gate-msg" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CODE = "1122";
+  var KEY = "mfsa_gate_ok";
+  var gate = document.getElementById('gate');
+  var pin = document.getElementById('pin');
+  var inputs = Array.prototype.slice.call(pin.querySelectorAll('input'));
+  var msg = document.getElementById('gate-msg');
+
+  function unlock(){
+    gate.style.display = 'none';
+    document.body.classList.remove('locked');
+    try { sessionStorage.setItem(KEY, '1'); } catch(e){}
+  }
+
+  try { if (sessionStorage.getItem(KEY) === '1'){ unlock(); return; } } catch(e){}
+
+  function current(){ return inputs.map(function(i){return i.value;}).join(''); }
+
+  function check(){
+    if (current().length < 4) return;
+    if (current() === CODE){ unlock(); }
+    else {
+      gate.classList.add('err');
+      msg.textContent = 'Incorrect code — try again';
+      setTimeout(function(){ gate.classList.remove('err'); }, 400);
+      inputs.forEach(function(i){ i.value=''; });
+      inputs[0].focus();
+    }
+  }
+
+  inputs.forEach(function(inp, idx){
+    inp.addEventListener('input', function(){
+      this.value = this.value.replace(/[^0-9]/g,'');
+      if (this.value && idx < inputs.length-1){ inputs[idx+1].focus(); }
+      check();
+    });
+    inp.addEventListener('keydown', function(e){
+      if (e.key === 'Backspace' && !this.value && idx > 0){ inputs[idx-1].focus(); }
+    });
+    inp.addEventListener('paste', function(e){
+      e.preventDefault();
+      var digits = (e.clipboardData.getData('text')||'').replace(/[^0-9]/g,'').slice(0,4).split('');
+      digits.forEach(function(d,i){ if(inputs[i]) inputs[i].value=d; });
+      var next = Math.min(digits.length, inputs.length-1);
+      inputs[next].focus();
+      check();
+    });
+  });
+
+  window.addEventListener('load', function(){ inputs[0].focus(); });
+})();
+</script>
 
 <!-- HERO -->
 <header class="hero">
