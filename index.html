@@ -326,7 +326,7 @@
   <div class="wrap">
     <div class="stat"><div class="n"><em>21%</em></div><div class="l">of companies have a mature model for governing autonomous AI<br><span style="opacity:.6">Deloitte, 2026 State of AI in the Enterprise</span></div></div>
     <div class="stat"><div class="n"><em>74%</em></div><div class="l">of enterprises expect to use agentic AI within two years — up from 23% today<br><span style="opacity:.6">Deloitte, 2026 State of AI in the Enterprise</span></div></div>
-    <div class="stat"><div class="n">16</div><div class="l">question areas in the Annex 1 self-assessment register</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">key areas the MFSA examined across the sector</div></div>
     <div class="stat"><div class="n">4</div><div class="l">priority areas where supervisory attention lands first</div></div>
   </div>
 </div>
@@ -432,13 +432,13 @@
 <section id="mapping">
   <div class="wrap">
     <div class="sec-head"><span class="sec-no">03</span><h2>Where Deloitte's AI Controls &amp; Assurance services map</h2></div>
-    <p class="sec-intro">Governance is the enabler of confident adoption — not the brake on it. These services align to the expectations above and to the Annex 1 exercise below.</p>
+    <p class="sec-intro">Governance is the enabler of confident adoption — not the brake on it. These services align to the expectations above.</p>
     <div class="map">
       <div class="cell"><h3>AI Governance &amp; Control</h3><p>Advisory review of AI governance structures and control frameworks, including AI inventory completeness and technical documentation — addressing the call for a board-approved AI strategy and stronger oversight.</p><div class="links">→ 4.1 Governance &amp; oversight</div></div>
       <div class="cell"><h3>AI Control over Risk</h3><p>Advisory review of how AI-related risks are identified, assessed and managed across governance and operations, including classification of high-risk AI systems.</p><div class="links">→ 4.3 Model risk · 4.5 Systemic</div></div>
       <div class="cell"><h3>AI Readiness</h3><p>Assurance-readiness and gap analysis against current and proposed AI regulation and standards, including EU AI Act and ISO/IEC 42001 gap assessments.</p><div class="links">→ Supervisory readiness on request</div></div>
       <div class="cell"><h3>Internal Audit Support</h3><p>Technical AI, control and governance specialist support to internal audit — strengthening the third line and the board's overall lines of oversight.</p><div class="links">→ Three lines of defence</div></div>
-      <div class="cell"><h3>MFSA Self-Assessment Support</h3><p>Structured support to complete the Annex 1 register — building the inventory of AI-enabled processes, tools and vendor dependencies, mapping data flows, and assembling governance evidence and board reporting.</p><div class="links">→ Annex 1 (below)</div></div>
+      <div class="cell"><h3>MFSA Self-Assessment Support</h3><p>Structured support to complete the MFSA's Annex 1 register — building the inventory of AI-enabled processes, tools and vendor dependencies, mapping data flows, and assembling governance evidence and board reporting.</p><div class="links">→ Section 5 of the letter</div></div>
     </div>
   </div>
 </section>
@@ -473,38 +473,10 @@
   </div>
 </section>
 
-<!-- ANNEX 1 EXPLORER — signature -->
-<section id="annex">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">05</span><h2>Annex 1, opened up: the self-assessment register</h2></div>
-    <div class="annex-intro">
-      <div>
-        <p class="sec-intro" style="margin-bottom:0">The email teased the self-assessment. This is it. The MFSA's Annex 1 is a structured register across five domains — for each question it names the <strong>evidence you will need</strong> and the <strong>output you must produce</strong>. Results are not submitted today, but the MFSA may request evidence that the exercise was performed, considered at board level, and that gaps are being remediated. Filter by domain, then open any question.</p>
-      </div>
-      <div class="annex-meta">
-        <div class="big">5<em>+16</em></div>
-        <p>five domains · sixteen question areas · plus ten transaction-monitoring &amp; financial-crime sub-questions that apply only where TM AI is in use.</p>
-      </div>
-    </div>
-
-    <div class="domains" id="domains">
-      <button class="chip active" data-d="all"><span class="c">▣</span>All domains</button>
-      <button class="chip" data-d="A"><span class="c">A</span>Process &amp; Tool Inventory</button>
-      <button class="chip" data-d="B"><span class="c">B</span>Data Governance &amp; Flow</button>
-      <button class="chip" data-d="C"><span class="c">C</span>Governance, Accountability &amp; Board MI</button>
-      <button class="chip" data-d="D"><span class="c">D</span>Third-Party Risk &amp; Change</button>
-      <button class="chip" data-d="E"><span class="c">E</span>Conduct, Prudential &amp; Financial Crime</button>
-    </div>
-
-    <div class="register" id="register"><!-- rows injected --></div>
-    <p class="tm-note">Questions 15g–15j apply only where transaction-monitoring AI is used.</p>
-  </div>
-</section>
-
 <!-- CLOSING -->
 <section class="close" id="next">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-no">06</span><h2>Where supervisory attention lands first</h2></div>
+    <div class="sec-head"><span class="sec-no">05</span><h2>Where supervisory attention lands first</h2></div>
     <p class="sec-intro">The MFSA will fold AI into its ongoing supervision — onsite inspections and thematic reviews — and has flagged four priority areas. The Financial Supervisors Academy will also offer training to build oversight capability across firms.</p>
     <div class="focus">
       <div><span class="n">Priority 01</span>Governance &amp; oversight frameworks</div>
@@ -529,149 +501,6 @@
   </div>
 </footer>
 
-<script>
-const Q = [
- {id:"1",d:"A",t:"End-to-end process inventory completeness",
-  q:"Have you listed ALL business-critical processes, broken each into sub-steps, and named every tool used at each sub-step (including office automation and small scripts)?",
-  ev:"Annex A register; process maps or swim-lanes; screenshots or SOPs showing the tools used at each step.",
-  pr:"Total processes; total sub-steps; total tools; tools-per-process (min / average / max)."},
- {id:"2",d:"A",t:"Vendor &amp; sub-vendor (4th-party) identification",
-  q:"For each tool, have you identified the primary vendor and all material sub-vendors — cloud/hosting, AI model provider, key data providers, and open-source components in an SBOM?",
-  ev:"Contracts, procurement due-diligence, vendor responses, and Software Bill of Materials or architecture diagrams.",
-  pr:"Vendors per process; % of tools involving 4th parties; top-5 vendor concentration; CSP concentration by provider and region."},
- {id:"3",d:"A",t:"AI capability detection &amp; classification",
-  q:"For each tool, have you confirmed whether it includes AI? If yes — recorded AI type (ML, GenAI, NLP, CV, agentic), who provides it, where it runs, and its exact function in the step?",
-  ev:"Vendor documentation, technical product sheets, discovery testing results, procurement questionnaires answering AI capability explicitly.",
-  pr:"Total AI-enabled tools (overall and per process); breakdown by AI type and by provider (internal vs external)."},
- {id:"4",d:"A",t:"Autonomy, materiality &amp; impact tagging",
-  q:"Is each AI use tagged with autonomy level (None/Assist/HITL/Partial/Full), materiality (Low/Medium/High), and whether it can affect customers or markets?",
-  ev:"Model inventory, criticality criteria, approvals showing who authorised the autonomy level and safeguards.",
-  pr:"Number of high-materiality AI uses; % that are Partial/Full automation; split between customer-facing and internal uses."},
 
- {id:"5",d:"B",t:"Data lineage &amp; flows per AI-enabled tool",
-  q:"For each AI use, have you mapped inputs and outputs; whether personal or special-category data is involved; training vs inference datasets; storage and processing locations; and cross-border transfers?",
-  ev:"Data flow diagrams, Records of Processing Activities (RoPA), lineage maps from data governance tools.",
-  pr:"Documented data flows; number using special categories; number with cross-border transfers; % of AI uses with a complete lineage map."},
- {id:"6",d:"B",t:"Lawful basis, consent &amp; reuse controls",
-  q:"Is the lawful basis documented for each dataset used by AI? Are customer notices or consents up to date? Are there rules and approvals for reusing data across tools and processes?",
-  ev:"DPIAs, Legitimate Interests Assessments (LIA), privacy notices, reuse approvals.",
-  pr:"% of datasets with recorded lawful basis and notice; number of data reuse cases; number lacking consent/notice updates."},
- {id:"7",d:"B",t:"Bias, performance &amp; drift monitoring coverage",
-  q:"Do all AI uses have documented pre-deployment tests (accuracy and fairness) and ongoing post-deployment monitoring (performance, drift, fairness thresholds) with clear remediation triggers?",
-  ev:"Test protocols, fairness/accuracy reports, monitoring dashboards, issue logs.",
-  pr:"% of AI uses with full pre-deployment tests; number without drift monitoring; remediations in the last 12 months."},
-
- {id:"8a",d:"C",t:"Ownership &amp; RACI per process / tool / vendor",
-  q:"For each line in the register, is there a named business owner, model owner, data owner and vendor owner — with no conflicts (e.g. the same person not both building and approving)?",
-  ev:"RACI matrix, policy extracts, committee Terms of Reference.",
-  pr:"% coverage with named owners; number of ownership gaps; conflicts of interest identified and resolved."},
- {id:"8b",d:"C",t:"Cross-functional oversight (FCC, Compliance, IT)",
-  q:"Are FCC, Compliance and IT consistently involved in oversight of AI uses touching their remit — FCC for KYC/TM/AML, Compliance for legal and customer protections, IT for change control, security and resilience?",
-  ev:"Committee minutes, attendance records, sign-offs, change tickets showing FCC/Compliance/IT input.",
-  pr:"% of AI uses with FCC/Compliance/IT participation in design/validation/review; standing forums and cadence."},
- {id:"8c",d:"C",t:"Calibration &amp; maintenance operating model",
-  q:"Does calibration and maintenance happen internally, jointly with the vendor, or externally? Are decision rights, change approval, testing responsibilities, rollback/kill-switch and vendor access clearly defined and evidenced?",
-  ev:"Operating procedures, vendor contracts/addenda, change logs/CAB minutes, model cards, access reviews.",
-  pr:"Count and % Internal vs Joint vs External-only; for external-only: compensating controls; who can change models/prompts/thresholds and where documented."},
- {id:"9",d:"C",t:"Board MI completeness on AI &amp; vendor risk",
-  q:"Does the board receive regular reports showing AI uses per process; vendor and 4th-party concentrations; incidents and customer detriment; and an overall AI risk heatmap with actions and deadlines?",
-  ev:"Board agendas and packs, action logs with owners and due dates.",
-  pr:"Reporting frequency; copies of the last two packs; list of open actions and their age."},
-
- {id:"10",d:"D",t:"Outsourcing &amp; ICT risk controls per vendor",
-  q:"For all vendors supporting AI, do contracts cover SLAs, security, audit rights, incident notification, data location, exit/portability and approval for sub-vendors?",
-  ev:"Contracts and addenda, due-diligence results, vendor responses.",
-  pr:"% of vendors meeting all key clauses; number of gaps by clause; high-risk vendors with gaps."},
- {id:"11",d:"D",t:"Fourth-party visibility &amp; concentration risk",
-  q:"Can you quantify reliance on the top providers (cloud/AI model/data)? Can you spot single points of failure or regional dependencies — e.g. all in one data-centre region?",
-  ev:"Aggregated Annex A register; a short concentration analysis note or slide.",
-  pr:"Share of AI uses dependent on top-3 providers; optional concentration index; critical processes depending on a single provider."},
- {id:"12",d:"D",t:"Change management, rollback &amp; kill-switch",
-  q:"Do AI-enabled tools follow change control (versioning, peer review/approval, canary/A-B testing where suitable) and have a tested rollback plan and an accessible kill-switch?",
-  ev:"Change logs, Change Advisory Board (CAB) minutes, incident post-mortems / root-cause analyses.",
-  pr:"% of AI uses with documented rollback and kill-switch; emergency rollbacks or drills in the last 12 months."},
-
- {id:"13",d:"E",t:"Customer-facing AI: disclosure &amp; human escalation",
-  q:"Are customers clearly told when they interact with AI? Is it easy to reach a trained human, and do you track handover speed — especially for vulnerable customers?",
-  ev:"Scripts, chatbot configurations, QA reports, service dashboards.",
-  pr:"Channels using AI; % with AI disclosure; % with tracked human escalation; average time-to-human."},
- {id:"14",d:"E",t:"Financial exclusion &amp; fairness",
-  q:"Have you assessed whether AI-supported decisions risk bias or financial exclusion? Are outcomes explainable, subject to effective challenge, and governed as sensitive/high-risk with clear management accountability?",
-  ev:"Model and materiality documentation, fairness/bias testing, customer communications and case logs, records of management oversight.",
-  pr:"AI use cases in segmentation, credit, pricing and advice; number with completed fairness/exclusion assessments; outcome differences across customer groups; manual overrides, challenges and complaints."},
- {id:"15a",d:"E",t:"Systemic interaction &amp; feedback risks (all AI)",
-  q:"Have you assessed shared data/model dependencies, feedback loops, single points of failure and alert/decision volatility — with scenarios and manual overrides/kill-switches defined?",
-  ev:"Scenario packs, playbooks, change/incident logs.",
-  pr:"Scenarios run; overlaps in providers/data; dates/results of drills (kill-switch, rollback, manual handover)."},
- {id:"15b",d:"E",t:"FC strategy for AI",
-  q:"Does the firm have a documented strategy for AI in Financial Crime (AML, fraud, screening, KYC) — covering objectives, scope, roles, controls and periodic review?",
-  ev:"FC AI strategy, policy addenda, board/committee approval.",
-  pr:"Strategy document name/date; next review due; scope of AI uses covered."},
- {id:"15c",d:"E",t:"Alignment with FC risk assessment &amp; appetite",
-  q:"How does AI use in FC align with your enterprise FC risk assessment and risk appetite — thresholds for false positives/negatives, customer impact and resourcing?",
-  ev:"Business risk assessment, risk appetite statements, MI.",
-  pr:"Reference to latest FC risk assessment; mapping notes to appetite metrics and thresholds."},
- {id:"15d",d:"E",t:"Missed-case learning",
-  q:"Has the firm identified cases AI initially missed (e.g. SARs/STRs later found by humans or post-event review) and fed them back for model improvement?",
-  ev:"Case reviews, QA/QC logs, model change tickets.",
-  pr:"Missed cases detected; % reviewed; model updates stemming from missed-case analysis."},
- {id:"15e",d:"E",t:"Review / recalibration thresholds",
-  q:"What quantitative thresholds trigger model review or recalibration — precision/recall drift, false positives/negatives, case ageing, throughput, alert volatility?",
-  ev:"Monitoring dashboards, threshold register, CAB minutes.",
-  pr:"List of thresholds and current values; threshold breaches in the last 12 months; outcomes."},
- {id:"15f",d:"E",t:"Use-case risk classification",
-  q:"Has the firm assessed whether each FC AI use-case is high-risk (financial-crime or customer impact) with proportionate controls — HITL, sampling, second-line review?",
-  ev:"Risk classification criteria, approvals, control design.",
-  pr:"Count/% of high-risk FC AI uses; control overlays applied."},
- {id:"15g",d:"E",tm:true,t:"TM — Typology coverage",
-  q:"Which typologies is the TM model designed to detect (layering, smurfing, mule activity, sanctions evasion, fraud), and how is coverage validated?",
-  ev:"Typology library, validation reports, red-team tests, MLRO approval.",
-  pr:"Typology list; validation frequency; gaps and remediation plan."},
- {id:"15h",d:"E",tm:true,t:"TM — Feature/rule classification &amp; risk-rating",
-  q:"How are data points/features and rules classified and risk-rated? Are proxies for protected characteristics controlled?",
-  ev:"Feature governance pack, fairness testing artifacts, MLRO approval.",
-  pr:"Feature/rule catalog with risk weights; fairness checks."},
- {id:"15i",d:"E",tm:true,t:"TM — Operating mode vs rules-based",
-  q:"Does the AI replace, complement, or work in tandem with rules-based scenarios (e.g. as a prioritiser)? Is there a challenger or back-stop?",
-  ev:"Design docs, Policies &amp; Procedures, AML Manual.",
-  pr:"Mode per scenario; presence of challenger/back-stop."},
- {id:"15j",d:"E",tm:true,t:"TM — Alert-volume stability monitoring",
-  q:"Is there monitoring for sudden drops or surges in alert volumes or case conversions, with investigation and escalation?",
-  ev:"MI dashboards, incident logs.",
-  pr:"KPIs on alert volumes and conversion; anomalies and investigations."},
- {id:"16",d:"E",t:"Market &amp; portfolio AI correlation assessment",
-  q:"Have you analysed shared data/model dependencies, correlation/herding risks and feedback loops, and run stress scenarios with clear kill-switches or manual overrides?",
-  ev:"Stress-test packs, scenario results, playbooks showing who does what and when.",
-  pr:"Scenarios run; overlaps in providers/data; results from a 'liquidity withdrawal' drill (how you would reduce or stop activity safely)."}
-];
-
-const reg = document.getElementById('register');
-function render(filter){
-  reg.innerHTML = Q.filter(x => filter==='all' || x.d===filter).map(x => `
-    <details class="qrow" data-d="${x.d}">
-      <summary class="qhead">
-        <span class="qid">${x.id}</span>
-        <span class="qt">${x.t}${x.tm?' <span class="mono" style="color:var(--signal);font-size:11px;letter-spacing:.08em">· TM only</span>':''}</span>
-        <span class="qx">+</span>
-      </summary>
-      <div class="qbody">
-        <p class="q">${x.q}</p>
-        <div class="qcols">
-          <div class="evidence"><h4>Evidence you will need</h4><p>${x.ev}</p></div>
-          <div class="produce"><h4>What you must produce</h4><p>${x.pr}</p></div>
-        </div>
-      </div>
-    </details>`).join('');
-}
-render('all');
-
-document.querySelectorAll('#domains .chip').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('#domains .chip').forEach(b=>b.classList.remove('active'));
-    c.classList.add('active');
-    render(c.dataset.d);
-  });
-});
-</script>
 </body>
 </html>
